@@ -59,7 +59,7 @@ a:hover {
   position: relative;
   width: 100%;
   height: 100vh;
-  background: url('assets/hero-bg.jpg') no-repeat center center/cover; /* 🔁 Replace with your image path */
+  background: url('assets/bg.jpg') no-repeat center center/cover; /* 🔁 Replace with your image path */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -105,16 +105,18 @@ a:hover {
   margin-top: 15px;
 }
 
-.cursor {
-  display: inline-block;
-  color: #fffefe;
-  animation: blink 1s infinite;
+.typed-roles div {
+  font-weight: bold;
+  font-family: monospace;
+  white-space: nowrap;
+  border-right: 2px solid;
+  animation: blink 1s steps(1) infinite;
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50% { border-color: transparent; }
 }
+
 
 .scroll-down {
   font-size: 2rem;
@@ -387,7 +389,15 @@ body.dark footer {
   .about-container {
     flex-direction: column;
   }
+}.cursor {
+  display: inline-block;
+  animation: blink 1s infinite;
 }
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
 =======
 /* Reset and Base */
 * {

@@ -1,123 +1,56 @@
-<<<<<<< HEAD
-// 🌙 Dark Mode Toggle
-const toggle = document.getElementById("toggle-dark");
-const body = document.body;
-const icon = toggle.querySelector("i");
+<script>
+  // 🌙 Dark Mode Toggle
+  const toggle = document.getElementById("toggle-dark");
+  const body = document.body;
+  const icon = toggle.querySelector("i");
 
-// Load saved theme from localStorage
-if (localStorage.getItem("theme") === "dark") {
-  body.classList.add("dark");
-  icon.classList.remove("fa-moon");
-  icon.classList.add("fa-sun");
-}
-
-// Toggle dark mode
-toggle.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  const isDark = body.classList.contains("dark");
-
-  // Change icon
-  icon.classList.toggle("fa-moon", !isDark);
-  icon.classList.toggle("fa-sun", isDark);
-// 🌙 Dark Mode Toggle
-const toggle = document.getElementById("toggle-dark");
-const body = document.body;
-const icon = toggle.querySelector("i");
-
-// Load saved theme from localStorage
-if (localStorage.getItem("theme") === "dark") {
-  body.classList.add("dark");
-  icon.classList.remove("fa-moon");
-  icon.classList.add("fa-sun");
-}
-
-// Toggle dark mode
-toggle.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  const isDark = body.classList.contains("dark");
-
-  // Change icon
-  icon.classList.toggle("fa-moon", !isDark);
-  icon.classList.toggle("fa-sun", isDark);
-
-  // Save preference
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
-
-// ✅ AOS Scroll Animation Init
-AOS.init({
-  duration: 1000,
-  easing: "ease-in-out",
-  once: true
-});
-
-const roles = ["Software Developer", "Problem Solver", "Cloud Enthusiast"];
-let wordIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-
-const typedText = document.querySelector(".typed-text");
-
-function type() {
-  const current = roles[wordIndex];
-  const display = isDeleting
-    ? current.substring(0, charIndex--)
-    : current.substring(0, charIndex++);
-
-  typedText.textContent = display;
-
-  if (!isDeleting && charIndex === current.length) {
-    setTimeout(() => (isDeleting = true), 1000);
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    wordIndex = (wordIndex + 1) % roles.length;
+  // Load saved theme from localStorage
+  if (localStorage.getItem("theme") === "dark") {
+    body.classList.add("dark");
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
   }
 
-  setTimeout(type, isDeleting ? 50 : 120);
-}
+  // Toggle dark mode
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("dark");
+    const isDark = body.classList.contains("dark");
 
-document.addEventListener("DOMContentLoaded", type);
+    // Change icon
+    icon.classList.toggle("fa-moon", !isDark);
+    icon.classList.toggle("fa-sun", isDark);
 
-  // Save preference
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
+    // Save preference
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+  
+  const roles = ["Software Developer", "Problem Solver", "Cloud Enthusiast"];
+  const typedRolesContainer = document.querySelector(".typed-roles");
 
-// ✅ AOS Scroll Animation Init
-AOS.init({
-  duration: 1000,
-  easing: "ease-in-out",
-  once: true
-});
-=======
-// 🌙 Dark Mode Toggle
-const toggle = document.getElementById("toggle-dark");
-const body = document.body;
-const icon = toggle.querySelector("i");
+  let wordIndex = 0;
 
-// Load saved theme from localStorage
-if (localStorage.getItem("theme") === "dark") {
-  body.classList.add("dark");
-  icon.classList.remove("fa-moon");
-  icon.classList.add("fa-sun");
-}
+  function typeRole(role, container, callback) {
+    let charIndex = 0;
+    let interval = setInterval(() => {
+      container.textContent = role.substring(0, charIndex++);
+      if (charIndex > role.length) {
+        clearInterval(interval);
+        setTimeout(callback, 1000);
+      }
+    }, 100);
+  }
 
-// Toggle dark mode
-toggle.addEventListener("click", () => {
-  body.classList.toggle("dark");
-  const isDark = body.classList.contains("dark");
+  function showRoles() {
+    if (wordIndex >= roles.length) return;
+    const roleDiv = document.createElement("div");
+    typedRolesContainer.appendChild(roleDiv);
 
-  // Change icon
-  icon.classList.toggle("fa-moon", !isDark);
-  icon.classList.toggle("fa-sun", isDark);
+    typeRole(roles[wordIndex], roleDiv, () => {
+      wordIndex++;
+      showRoles();
+    });
+  }
 
-  // Save preference
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-});
+  document.addEventListener("DOMContentLoaded", showRoles);
 
-// ✅ AOS Scroll Animation Init
-AOS.init({
-  duration: 1000,
-  easing: "ease-in-out",
-  once: true
-});
->>>>>>> 614000540540273711efbdd74618c0206f284542
+</script>
